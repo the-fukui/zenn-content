@@ -1,0 +1,36 @@
+{
+  "name": "zenn-content",
+  "version": "1.0.0",
+  "repository": "https://the-fukui@github.com/the-fukui/zenn-content.git",
+  "author": "the-fukui <account@the-fukui.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write './**/*.md'",
+    "lint": "textlint --fix ./**/*.md && textlint ./**/*.md",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{md}": [
+      "prettier --write",
+      "textlint --fix",
+      "textlint"
+    ]
+  },
+  "devDependencies": {
+    "@textlint-ja/textlint-rule-no-synonyms": "^1.3.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^13.0.0",
+    "zenn-cli": "^0.1.112",
+    "prettier": "^2.6.2",
+    "prettier-plugin-md-nocjsp": "^1.2.0",
+    "sudachi-synonyms-dictionary": "^10.0.0",
+    "textlint": "^12.1.1",
+    "textlint-rule-ja-hiragana-fukushi": "^1.3.0",
+    "textlint-rule-ja-hiragana-hojodoushi": "^1.0.4",
+    "textlint-rule-ja-hiragana-keishikimeishi": "^1.1.0",
+    "textlint-rule-preset-ja-spacing": "^2.2.0",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0"
+  }
+}

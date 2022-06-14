@@ -8,7 +8,8 @@
                 "*.md"
             ],
             "options": {
-                "parser": "markdown-nocjsp"
+                "parser": "markdown-nocjsp",
+                "embeddedLanguageFormatting": "off"
             }
         }
     ]

@@ -6,8 +6,8 @@ topics: [nextjs]
 published: false
 ---
 
-next/imageは画像を最適化してくれるNext.jsビルトインの機能です。
-サイト内外を問わず圧縮リサイズなどがお手軽に出来て便利ですが、ちょっと危ないパターンもあります。
+next/imageは画像を最適化してくれるNext.jsビルトインの機能です。  
+サイト内外を問わず圧縮リサイズなどがお手軽に出来て便利ですが、注意が必要なパターンもあります。
 
 # TL;DR
 
@@ -16,7 +16,6 @@ next/imageは画像を最適化してくれるNext.jsビルトインの機能で
   - 例：Google Cloud Storage（storage.googleapis.com）
 - もちろんCPUリソースは自分のところのものが使われる
 - しかも自分のサイトのドメインのコンテンツとして発信される
-- 危なくない?
 - 対策はストレージに独自ドメイン割り当てるか画像URLをプロキシするかぐらい?
 
 # next/image?
@@ -35,7 +34,7 @@ https://nextjs-arbitrary-image-path.vercel.app/
 
 かわいいワンちゃんですね。
 
-create-next-appしたNext.jsプロジェクトに、Google Cloud Storageに置いた自分の画像を表示しています。
+create-next-appしたNext.jsプロジェクトに、Google Cloud Storageに置いた自分の画像を表示しています。  
 元画像: https://storage.googleapis.com/nextjs-arbitrary-image-path/wanchan.jpg
 
 外部URLの画像をnext/imageで使う場合、画像URLのドメインをホワイトリスト登録する必要があるので、下記のようにnext.config.jsを作成しました。
@@ -58,7 +57,7 @@ module.exports = {
 https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fnextjs-arbitrary-image-path%2Fwanchan.jpg&w=1920&q=75
 
 末尾に`url`というクエリで画像のパスが指定されています。  
-それでは、**別のバケット**においた下記画像を`url`に指定してみたらどうなるでしょうか。  
+それでは、**別のバケット**においた下記画像を`url`に指定してみます。  
 　https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg
 
 https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75

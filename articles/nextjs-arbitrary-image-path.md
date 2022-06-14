@@ -101,7 +101,7 @@ https://cloud.google.com/storage/docs/hosting-static-website?hl=ja
 
 Next.jsのrewrite機能を使い、外部画像のURLをプロキシすることも有効です。  
 テナントを分けているサブディレクトリまで含めたパスを`destination`と指定することで、相対URLのまま外部画像の表示が可能です。  
-（相対URLなので、next.config.jsのimages.domainsに登録は必要ありません）。
+（相対URLなので、next.config.jsのimages.domainsに登録は必要ありません）。  
 お手軽ですが、CMS等外部APIから返ってきた画像パスがフルパスの場合、別途相対パスに書き換える処理が必要になります。
 
 ```js:next.config.js

@@ -90,13 +90,13 @@ Next.js側でホワイトリストとして登録できる情報は今のとこ�
 
 Google Cloud Storageの場合、ロードバランサーのバックエンドバケットとして指定することで独自ドメインの割当が可能です。
 
+https://cloud.google.com/storage/docs/hosting-static-website?hl=ja
+
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 
 （ただし、このためだけにロードバランサーまで用意するのはちょっと大げさかもしれません）。
 
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
-
-https://cloud.google.com/storage/docs/hosting-static-website?hl=ja
 
 ## 画像URLをプロキシする
 

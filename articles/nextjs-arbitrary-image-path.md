@@ -1,5 +1,5 @@
 ---
-title: 'next/imageのimages.domainsに共用ドメインを使用すると危ないかも'
+title: 'next/imageのホワイトリストに共用ドメインを指定するときに注意すること'
 emoji: '⚠'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: [nextjs]
@@ -11,12 +11,13 @@ next/imageは画像を最適化してくれるNext.jsビルトインの機能で
 
 # TL;DR
 
-- 外部画像を最適化する場合、最適化を許可する画像URLのドメインを`next.config.js`の`images.domains`に指定する
+- 外部画像を最適化する場合、最適化を許可する画像URLのドメインを`next.config.js`の`images.domains`に指定する（ホワイトリスト方式）
 - クラウド系ストレージ(Storage as a Service)等を利用していて、**サブディレクトリ**でテナントを切り分ける方式の場合、**任意のテナントの画像を表示・圧縮し放題**
   - 例：Google Cloud Storage（storage.googleapis.com）
 - もちろんCPUリソースは自分のところのものが使われる
 - しかも自分のサイトのドメインのコンテンツとして発信される
-- 対策はストレージに独自ドメイン割り当てるか画像URLをプロキシするかぐらい?
+- 現在の対策はストレージに独自ドメイン割り当てるか画像URLをプロキシするかぐらい?
+- ホワイトリストの詳細指定はNext.js 12.1.7で試験的に対応予定?
 
 # next/image?
 
@@ -54,13 +55,13 @@ module.exports = {
 # 問題：第三者の画像を最適化できる
 
 ここで、サンプルで表示されている画像（next/imageで最適化している画像）のURLは下記です。  
-https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fnextjs-arbitrary-image-path%2Fwanchan.jpg&w=1920&q=75
+[https://nextjs-arbitrary-image-path.vercel.app/\_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fnextjs-arbitrary-image-path%2Fwanchan.jpg&w=1920&q=75](https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fnextjs-arbitrary-image-path%2Fwanchan.jpg&w=1920&q=75)
 
 末尾に`url`というクエリで画像のパスが指定されています。  
 それでは、**別のバケット**においた下記画像を`url`に指定してみます。  
-　https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg
+[https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg](https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg)
 
-https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75
+[https://nextjs-arbitrary-image-path.vercel.app/\_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75](https://nextjs-arbitrary-image-path.vercel.app/_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75)
 
 なんと、猫ちゃんが表示されました。悪そうですね。
 
@@ -121,3 +122,40 @@ module.exports = {
 ```js:pages/index.js
 <Image src="/proxy/wanchan.jpg" alt="ワンちゃんが海辺を走っている画像" width={640} height={427} />
 ```
+
+## 次のバージョンアップで試験的に対応予定?
+
+https://github.com/vercel/next.js/blob/canary/docs/api-reference/next/image.md#remote-patterns
+
+一番理想的な方法です。  
+現在Canaryになっている`Next.js v2.1.7`では、next/imageのホワイトリストをより詳細に設定できる**Remote Patterns**の試験的な実装が予定されています。  
+（ただしあくまでもexperimentalな機能です）
+
+下記のようにprotocol・hostname・port・pathnameを指定でき、ワイルドカードも一部使用できるようになります。
+
+```js:next.config.js
+module.exports = {
+  experimental: {
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'example.com',
+          port: '',
+          pathname: '/account123/**',
+        },
+      ],
+    },
+  },
+}
+```
+
+### Canary版
+
+一応現在でもCanary版を使用すれば上記機能は使用できますが、もちろん**Not for production**です。
+実際に検証し、12.1.7-canary.39で動作することが確認できました  
+https://nextjs-arbitrary-image-path-a9wendvut-the-fukui.vercel.app/  
+https://github.com/the-fukui/nextjs-arbitrary-image-path/blob/feature/nextjs-12.1.7-canary.39-remote-patterns/next.config.js
+
+ホワイトリスト外なのでちゃんとエラーになります
+[https://nextjs-arbitrary-image-path-a9wendvut-the-fukui.vercel.app/\_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75](https://nextjs-arbitrary-image-path-a9wendvut-the-fukui.vercel.app/_next/image?url=https://storage.googleapis.com/nextjs-arbitrary-image-path-2/nekochan.jpg&w=1920&q=75)

@@ -129,7 +129,7 @@ module.exports = {
 https://github.com/vercel/next.js/blob/canary/docs/api-reference/next/image.md#remote-patterns
 
 一番理想的な方法です。  
-現在Canaryになっている`Next.js v2.1.7`では、next/imageのホワイトリストをより詳細に設定できる**Remote Patterns**の試験的な実装が予定されています。  
+現在Canaryになっている`Next.js v12.1.7`では、next/imageのホワイトリストをより詳細に設定できる**Remote Patterns**の試験的な実装が予定されています。  
 （ただしあくまでもexperimentalな機能です）
 
 下記のようにprotocol・hostname・port・pathnameを指定でき、ワイルドカードも一部使用できるようになります。

@@ -3,7 +3,8 @@ title: 'next/imageのホワイトリストに共用ドメインを指定する�
 emoji: '⚠'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: [nextjs]
-published: false
+published: true
+published_at: 2022-06-15 18:30
 ---
 
 next/imageは画像を最適化してくれるNext.jsビルトインの機能です。  

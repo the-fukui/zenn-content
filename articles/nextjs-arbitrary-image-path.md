@@ -19,7 +19,7 @@ next/imageは画像を最適化してくれるNext.jsビルトインの機能で
 - しかも自分のサイトのドメインのコンテンツとして発信される
 - 現在の対策はストレージに独自ドメイン割り当てるか画像URLをプロキシするかぐらい?
 - ~~ホワイトリストの詳細指定はNext.js 12.1.7で試験的に対応予定?~~
-  - 2022/06/30追記：[v12.2.0にて試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
+  - 2022/06/30追記：[v12.2.0にてホワイトリストの詳細指定が試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
 
 # next/image?
 
@@ -125,20 +125,20 @@ module.exports = {
 <Image src="/proxy/wanchan.jpg" alt="ワンちゃんが海辺を走っている画像" width={640} height={427} />
 ```
 
-## 次のバージョンアップで試験的に対応予定?
+## ホワイトリストの詳細指定
 
 ### 2022/06/30 追記
 
-[v12.2.0にて試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
+[v12.2.0にてホワイトリストの詳細指定が試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
 
-下記はCanary時点での情報ですが、詳細の指定方法はそのままでした。
+下記はCanary時点での情報ですが、詳細の指定方法は同様です。
 
 ---
 
 https://github.com/vercel/next.js/blob/canary/docs/api-reference/next/image.md#remote-patterns
 
 一番理想的な方法です。  
-現在Canaryになっている`Next.js v12.1.7`では、next/imageのホワイトリストをより詳細に設定できる**Remote Patterns**の試験的な実装が予定されています。  
+現在Canaryになっている`Next.js v2.1.7`では、next/imageのホワイトリストをより詳細に設定できる**Remote Patterns**の試験的な実装が予定されています。  
 （ただしあくまでもexperimentalな機能です）
 
 下記のようにprotocol・hostname・port・pathnameを指定でき、ワイルドカードも一部使用できるようになります。

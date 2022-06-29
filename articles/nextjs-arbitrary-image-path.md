@@ -18,7 +18,8 @@ next/imageは画像を最適化してくれるNext.jsビルトインの機能で
 - もちろんCPUリソースは自分のところのものが使われる
 - しかも自分のサイトのドメインのコンテンツとして発信される
 - 現在の対策はストレージに独自ドメイン割り当てるか画像URLをプロキシするかぐらい?
-- ホワイトリストの詳細指定はNext.js 12.1.7で試験的に対応予定?
+- ~~ホワイトリストの詳細指定はNext.js 12.1.7で試験的に対応予定?~~
+  - 2022/06/30追記：[v12.2.0にて試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
 
 # next/image?
 
@@ -125,6 +126,14 @@ module.exports = {
 ```
 
 ## 次のバージョンアップで試験的に対応予定?
+
+### 2022/06/30 追記
+
+[v12.2.0にて試験的に実装されました](https://nextjs.org/blog/next-12-2#remote-patterns-experimental)
+
+下記はCanary時点での情報ですが、詳細の指定方法はそのままでした。
+
+---
 
 https://github.com/vercel/next.js/blob/canary/docs/api-reference/next/image.md#remote-patterns
 

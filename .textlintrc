@@ -1,6 +1,11 @@
 {
   "filters": {
-    "comments": true
+    "comments": true,
+    "allowlist": {
+      "allow": [
+        ":::"
+      ]
+    }
   },
   "rules": {
     "@textlint-ja/no-synonyms": true,

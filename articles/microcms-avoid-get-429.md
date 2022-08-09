@@ -2,7 +2,7 @@
 title: 'microCMS JavaScript SDK で 429(Too Many Requests) を回避する'
 emoji: '🈵'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: [microcms, jaavscript, typescript, headlessCMS, api]
+topics: [microcms, javascript, typescript, headlessCMS, api]
 published: true
 ---
 
